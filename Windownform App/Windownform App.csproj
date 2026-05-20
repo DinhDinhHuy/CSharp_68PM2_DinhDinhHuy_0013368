@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="form_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_main.Designer.cs">
+      <DependentUpon>form_main.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UCQLLH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCQLLH.Designer.cs">
+      <DependentUpon>UCQLLH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCQLSV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCQLSV.Designer.cs">
+      <DependentUpon>UCQLSV.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_LopHoc.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,6 +99,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="form_main.resx">
+      <DependentUpon>form_main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +111,12 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCQLLH.resx">
+      <DependentUpon>UCQLLH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCQLSV.resx">
+      <DependentUpon>UCQLSV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_LopHoc.resx">
       <DependentUpon>UC_LopHoc.cs</DependentUpon>

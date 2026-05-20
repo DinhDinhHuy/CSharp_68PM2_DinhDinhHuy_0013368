@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Windownform_App
 {
-    internal class Program
+    public partial class UCQLLH : UserControl
     {
-        static void Main(string[] args)
+        public UCQLLH()
         {
-            Application.Run(new form_main());
+            InitializeComponent();
         }
     }
 }
