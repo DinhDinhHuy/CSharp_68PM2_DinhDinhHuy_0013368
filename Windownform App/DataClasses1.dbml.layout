@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses1">
+  <DataContextMoniker Name="/DataClasses1DataContext" />
+  <nestedChildShapes>
+    <classShape Id="00c7ced3-d46e-48f1-9258-805e5f13b78d" absoluteBounds="2.25, 1.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataClasses1DataContext/lop_hoc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c9e268e2-a828-40dd-9aaa-ecab2f71d0f6" absoluteBounds="2.265, 2.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f4e9cfb2-44b7-488e-956c-6d4d3da5f5c8" absoluteBounds="2.5, 3.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DataClasses1DataContext/sinh_vien" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10255127-9ee2-4653-935d-7a0f2319c7b3" absoluteBounds="2.515, 4.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.375 : 3.20359537760417); (3.375 : 3.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/lop_hoc/lop_hoc_sinh_vien" />
+      <nodes>
+        <classShapeMoniker Id="00c7ced3-d46e-48f1-9258-805e5f13b78d" />
+        <classShapeMoniker Id="f4e9cfb2-44b7-488e-956c-6d4d3da5f5c8" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
