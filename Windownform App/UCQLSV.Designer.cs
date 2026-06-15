@@ -36,7 +36,7 @@
             this.ngaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txt_lop = new System.Windows.Forms.ComboBox();
+            this.cbo_lop = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_gioitinh = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -135,7 +135,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txt_lop);
+            this.groupBox1.Controls.Add(this.cbo_lop);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txt_gioitinh);
             this.groupBox1.Controls.Add(this.label4);
@@ -153,13 +153,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin sinh viên";
             // 
-            // txt_lop
+            // cbo_lop
             // 
-            this.txt_lop.FormattingEnabled = true;
-            this.txt_lop.Location = new System.Drawing.Point(25, 405);
-            this.txt_lop.Name = "txt_lop";
-            this.txt_lop.Size = new System.Drawing.Size(358, 24);
-            this.txt_lop.TabIndex = 9;
+            this.cbo_lop.FormattingEnabled = true;
+            this.cbo_lop.Location = new System.Drawing.Point(25, 405);
+            this.cbo_lop.Name = "cbo_lop";
+            this.cbo_lop.Size = new System.Drawing.Size(358, 24);
+            this.cbo_lop.TabIndex = 9;
             // 
             // label5
             // 
@@ -425,7 +425,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox txt_lop;
+        private System.Windows.Forms.ComboBox cbo_lop;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox txt_gioitinh;
         private System.Windows.Forms.Label label4;

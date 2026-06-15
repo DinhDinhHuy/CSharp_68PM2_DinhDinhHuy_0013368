@@ -40,7 +40,18 @@ namespace Windownform_App
 
         private void UCQLSV_Load(object sender, EventArgs e)
         {
+            LoadLopHoc();
             loadData();
+        }
+
+        private void LoadLopHoc()
+        {
+            DataClasses1DataContext db = new DataClasses1DataContext();
+
+            cbo_lop.DataSource = db.lop_hocs.ToList();
+            cbo_lop.DisplayMember = "ten_lop";
+            cbo_lop.ValueMember = "ma_lop";
+            cbo_lop.SelectedIndex = -1;
         }
 
         private void loadData()
@@ -57,14 +68,9 @@ namespace Windownform_App
         {
             totalPage = (int)Math.Ceiling((double)danhSachSinhVien.Count / pageSize);
 
-            if (totalPage == 0)
-                totalPage = 1;
-
-            if (currentPage < 1)
-                currentPage = 1;
-
-            if (currentPage > totalPage)
-                currentPage = totalPage;
+            if (totalPage == 0) totalPage = 1;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPage) currentPage = totalPage;
 
             List<sinh_vien> data = danhSachSinhVien
                 .Skip((currentPage - 1) * pageSize)
@@ -95,7 +101,7 @@ namespace Windownform_App
 
             if (row.Cells["lop"].Value != null)
             {
-                txt_lop.Text = row.Cells["lop"].Value.ToString();
+                cbo_lop.SelectedValue = row.Cells["lop"].Value.ToString();
             }
 
             txt_mssv.ReadOnly = true;
@@ -106,7 +112,6 @@ namespace Windownform_App
             string MaSinhVien = txt_mssv.Text.Trim();
             string HoVaTen = txt_hoten.Text.Trim();
             string GioiTinh = txt_gioitinh.Text.Trim();
-            string Lop = txt_lop.Text.Trim();
             DateTime NgaySinh = txt_date.Value;
 
             if (MaSinhVien == "" || HoVaTen == "")
@@ -114,6 +119,14 @@ namespace Windownform_App
                 MessageBox.Show("Vui lòng nhập đầy đủ mã sinh viên và họ tên!");
                 return;
             }
+
+            if (cbo_lop.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn lớp học!");
+                return;
+            }
+
+            string Lop = cbo_lop.SelectedValue.ToString();
 
             DataClasses1DataContext db = new DataClasses1DataContext();
 
@@ -152,6 +165,12 @@ namespace Windownform_App
                 return;
             }
 
+            if (cbo_lop.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn lớp học!");
+                return;
+            }
+
             DataClasses1DataContext db = new DataClasses1DataContext();
 
             sinh_vien sv = db.sinh_viens.FirstOrDefault(x => x.ma_sv == MaSinhVien);
@@ -165,7 +184,7 @@ namespace Windownform_App
             sv.ho_ten = txt_hoten.Text.Trim();
             sv.gioitinh = txt_gioitinh.Text.Trim();
             sv.ngay_sinh = txt_date.Value;
-            sv.ma_lop = txt_lop.Text.Trim();
+            sv.ma_lop = cbo_lop.SelectedValue.ToString();
 
             db.SubmitChanges();
 
@@ -192,8 +211,7 @@ namespace Windownform_App
                 MessageBoxIcon.Warning
             );
 
-            if (result == DialogResult.No)
-                return;
+            if (result == DialogResult.No) return;
 
             DataClasses1DataContext db = new DataClasses1DataContext();
 
@@ -235,6 +253,7 @@ namespace Windownform_App
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             LamMoiForm();
+            LoadLopHoc();
             loadData();
         }
 
@@ -243,8 +262,9 @@ namespace Windownform_App
             txt_mssv.Clear();
             txt_hoten.Clear();
             txt_gioitinh.Text = "";
-            txt_lop.Text = "";
             txt_timkiem.Clear();
+
+            cbo_lop.SelectedIndex = -1;
 
             txt_date.Value = DateTime.Now;
 
