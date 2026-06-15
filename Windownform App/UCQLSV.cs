@@ -20,6 +20,8 @@ namespace Windownform_App
             lop.DataPropertyName = "ma_lop";
 
             DataQLSV.CellClick += DataQLSV_CellClick;
+            btnSua.Click += btnSua_Click;
+            btnLamMoi.Click += btnLamMoi_Click;
         }
 
         private void UCQLSV_Load(object sender, EventArgs e)
@@ -52,16 +54,31 @@ namespace Windownform_App
                 txt_date.Value = Convert.ToDateTime(row.Cells["ngaysinh"].Value);
             }
 
-            // txt_lop.Text = row.Cells["lop"].Value?.ToString();
+            txt_mssv.ReadOnly = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string HoVaTen = txt_hoten.Text;
-            string MaSinhVien = txt_mssv.Text;
+            string HoVaTen = txt_hoten.Text.Trim();
+            string MaSinhVien = txt_mssv.Text.Trim();
             DateTime NgaySinh = txt_date.Value;
-            string GioiTinh = txt_gioitinh.Text;
-            // string Lop = txt_lop.Text;
+            string GioiTinh = txt_gioitinh.Text.Trim();
+
+            if (MaSinhVien == "" || HoVaTen == "")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ mã sinh viên và họ tên!");
+                return;
+            }
+
+            DataClasses1DataContext db = new DataClasses1DataContext();
+
+            sinh_vien kt = db.sinh_viens.FirstOrDefault(x => x.ma_sv == MaSinhVien);
+
+            if (kt != null)
+            {
+                MessageBox.Show("Mã sinh viên đã tồn tại!");
+                return;
+            }
 
             sinh_vien sv = new sinh_vien();
 
@@ -69,14 +86,56 @@ namespace Windownform_App
             sv.ho_ten = HoVaTen;
             sv.ngay_sinh = NgaySinh;
             sv.gioitinh = GioiTinh;
-            // sv.ma_lop = Lop;
-
-            DataClasses1DataContext db = new DataClasses1DataContext();
 
             db.sinh_viens.InsertOnSubmit(sv);
             db.SubmitChanges();
 
+            MessageBox.Show("Thêm sinh viên thành công!");
+
             loadData();
+            LamMoiForm();
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            string MaSinhVien = txt_mssv.Text.Trim();
+
+            DataClasses1DataContext db = new DataClasses1DataContext();
+
+            sinh_vien sv = db.sinh_viens.FirstOrDefault(x => x.ma_sv == MaSinhVien);
+
+            if (sv == null)
+            {
+                MessageBox.Show("Không tìm thấy sinh viên cần sửa!");
+                return;
+            }
+
+            sv.ho_ten = txt_hoten.Text.Trim();
+            sv.ngay_sinh = txt_date.Value;
+            sv.gioitinh = txt_gioitinh.Text.Trim();
+
+            db.SubmitChanges();
+
+            MessageBox.Show("Cập nhật sinh viên thành công!");
+
+            loadData();
+            LamMoiForm();
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            LamMoiForm();
+        }
+
+        private void LamMoiForm()
+        {
+            txt_mssv.Clear();
+            txt_hoten.Clear();
+            txt_gioitinh.Text = "";
+            txt_date.Value = DateTime.Now;
+            txt_mssv.ReadOnly = false;
+
+            txt_mssv.Focus();
         }
     }
 }
