@@ -22,6 +22,7 @@ namespace Windownform_App
             DataQLSV.CellClick += DataQLSV_CellClick;
             btnSua.Click += btnSua_Click;
             btnLamMoi.Click += btnLamMoi_Click;
+            btnXoa.Click += btnXoa_Click;
         }
 
         private void UCQLSV_Load(object sender, EventArgs e)
@@ -136,6 +137,45 @@ namespace Windownform_App
             txt_mssv.ReadOnly = false;
 
             txt_mssv.Focus();
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            string MaSinhVien = txt_mssv.Text.Trim();
+
+            if (string.IsNullOrEmpty(MaSinhVien))
+            {
+                MessageBox.Show("Vui lòng chọn sinh viên cần xóa!");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc muốn xóa sinh viên này không?",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.No)
+                return;
+
+            DataClasses1DataContext db = new DataClasses1DataContext();
+
+            sinh_vien sv = db.sinh_viens
+                             .FirstOrDefault(x => x.ma_sv == MaSinhVien);
+
+            if (sv == null)
+            {
+                MessageBox.Show("Không tìm thấy sinh viên!");
+                return;
+            }
+
+            db.sinh_viens.DeleteOnSubmit(sv);
+            db.SubmitChanges();
+
+            MessageBox.Show("Xóa sinh viên thành công!");
+
+            loadData();
+            LamMoiForm();
         }
     }
 }
