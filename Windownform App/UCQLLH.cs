@@ -38,9 +38,23 @@ namespace Windownform_App
             btnPrevious.Click += btnPrevious_Click;
             button7.Click += btnNext_Click;
             btnLast.Click += btnLast_Click;
+            button5.Click += button5_Click;
         }
 
- 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string MaLop = maLop.Text.Trim();
+
+            if (MaLop == "")
+            {
+                MessageBox.Show("Vui lòng chọn lớp học trước!");
+                return;
+            }
+
+            DSSV form = new DSSV(MaLop);
+            form.ShowDialog();
+        }
+
         private void UCQLLH_Load(object sender, EventArgs e)
         {
             loadData();
